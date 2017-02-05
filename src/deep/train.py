@@ -6,8 +6,6 @@ import pandas as pd
 sys.path.append('../')
 import subset
 
-
-
 if P.ARCHITECTURE == 'unet':
     sys.path.append('./unet')
     from unet_trainer import UNetTrainer
@@ -47,11 +45,11 @@ if __name__ == "__main__":
 
     if P.ARCHITECTURE == 'unet':
 
-        generator_train = dataset.load_images
-        generator_val = partial(dataset.load_images, deterministic=True)
+        # generator_train = dataset.load_images
+        # generator_val = partial(dataset.load_images, deterministic=True)
 
-        print "Creating train splits"
-        train_splits = dataset.train_splits_by_z(filenames_train, 0.3, P.N_EPOCHS)
+        # print "Creating train splits"
+        # train_splits = dataset.train_splits_by_z(filenames_train, 0.3, P.N_EPOCHS)
 
         trainer = UNetTrainer()
         trainer.train(train_splits, filenames_val, generator_train, generator_val)

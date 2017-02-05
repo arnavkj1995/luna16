@@ -39,6 +39,7 @@ def define_network(input_var):
 
     def contraction(depth, deepest):
         n_filters = filter_for_depth(depth)
+        print (depth, n_filters)
         incoming = net['input'] if depth == 0 else net['pool{}'.format(depth-1)]
 
         net['conv{}_1'.format(depth)] = Conv2DLayer(incoming,
@@ -50,6 +51,7 @@ def define_network(input_var):
                                     W=HeNormal(gain='relu'),
                                     nonlinearity=nonlinearity)
 
+
         if P.BATCH_NORMALIZATION:
             net['conv{}_2'.format(depth)] = batch_norm(net['conv{}_2'.format(depth)], alpha=P.BATCH_NORMALIZATION_ALPHA)
 
@@ -58,7 +60,7 @@ def define_network(input_var):
 
     def expansion(depth, deepest):
         n_filters = filter_for_depth(depth)
-
+        print (depth, n_filters)
         incoming = net['conv{}_2'.format(depth+1)] if deepest else net['_conv{}_2'.format(depth+1)]
 
         upscaling = Upscale2DLayer(incoming,4)

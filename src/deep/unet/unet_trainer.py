@@ -62,9 +62,6 @@ class UNetTrainer(trainer.Trainer):
 
         return loss_total / batch_count
 
-
-
-
     def train(self, train_splits, filenames_val, train_generator, val_generator):
         logging.info("Starting training...")
 
